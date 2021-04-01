@@ -15,7 +15,7 @@ add_library(SOURCE_LIB STATIC
         scene/material/textureMaterial.hh scene/material/uniformTexture.hh scene/material/texture.hh
 
         scene/objects/object.hh
-        scene/objects/sphere.hh scene/objects/sphere.cc
+        scene/objects/sphere.hh
 
         scene/light/light.hh scene/light/pointLight.hh
         types/ray.hh types/pointn.hxx scene/pointIntensityComputer.hh
