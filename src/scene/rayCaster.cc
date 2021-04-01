@@ -5,8 +5,7 @@ Vector3<> RayCaster::getRayIntensity() const {
     double totDistance = 0.0;
     auto finalObject = std::shared_ptr<Object>();
 
-
-    for (auto i = 0U; i < 20; ++i) {
+    for (auto i = 0U; i < 150; ++i) {
         auto nextPoint = src + (dir * totDistance);
 
         auto dist = scene.getDist(nextPoint);
