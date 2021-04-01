@@ -1,5 +1,6 @@
 #include <thread>
 #include <scene/objects/sphere.hh>
+#include <scene/objects/capsule.hh>
 #include <scene/light/pointLight.hh>
 #include "scene/camera.hh"
 #include "scene/material/uniformTexture.hh"
@@ -67,12 +68,12 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_1 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  0, 255));
     auto sphere_1 = std::make_shared<Sphere>(Point3<>({4, 0, -1.2}), 1, material_1);
     auto material_2= std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 0));
-    auto sphere_2 = std::make_shared<Sphere>(Point3<>({4, 0, 1.2}), 1, material_2);
+    auto capsule_2 = std::make_shared<Capsule>(Point3<>({4, 0, 1.2}),Point3<>({4, 1, 10}), 1, material_2);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
 
     scene.addObject(sphere_1);
-    scene.addObject(sphere_2);
+    scene.addObject(capsule_2);
     scene.addLight(light1);
 
     auto resolution = vm["resolution"].as<unsigned >();
