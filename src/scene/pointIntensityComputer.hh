@@ -76,6 +76,7 @@ public:
         constexpr double softShadowLimit = Scene::intersectPrecision * 75;
         if (minDistSeen < softShadowLimit)
             return minDistSeen / softShadowLimit;
+
         return 1.0;
     }
 
@@ -103,20 +104,22 @@ public:
         auto res = Vector3<>({0, 0, 0});
 
         for (const auto& light : scene.lights()) {
+            // gather neceassary data
             const auto toLight = ray.point_.vectorTo(light->getPosition()).normalize();
+            const auto lightItensity = Light::convertColorToFloating(light->getColor());
             double shadowFactor = shadowingFactor(*light, toLight);
-            if (shadowFactor > 0.05) {
-                // gather neceassary data
-                const auto lightItensity = Light::convertColorToFloating(light->getColor());
+
+            auto diffuseLight = Light::clampColorFloating(
+                    getPointLightDiffusion(lightItensity, normal_.dot(toLight)));
+
+            if (shadowFactor > 0.1) {
                 // add diffusion
-                auto resLight = Light::clampColorFloating(
-                        getPointLightDiffusion(lightItensity, normal_.dot(toLight)));
+                res += (diffuseLight * shadowFactor);
                 // add specular
-                resLight += Light::clampColorFloating(
+                res += Light::clampColorFloating(
                         getPointLightSpecular(lightItensity, toLight));
-                res += resLight * shadowFactor;
             } else {
-                res += obj_color_floating_ * 0.05;
+                res += diffuseLight * 0.1;
             }
             // add reflection
             if (reflectLimit > 0) {
