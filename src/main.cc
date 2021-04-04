@@ -59,7 +59,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     }
 
     auto camera = Camera(
-            Point3<>({0, 0, 0}),
+            Point3<>({0, 10, 0}),
             Point3<>({8, 0, 0}),
             Vector3<>({0, 1, 0}),
             M_PI / 2,
@@ -72,7 +72,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_1 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  0, 255));
     auto torus_1 = std::make_shared<Torus>(Point3<>({10, 0, -1.2}), 3, 1, material_1);
     auto material_2= std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 0));
-    auto cube_2 = std::make_shared<Cube>(Point3<>({10, 0, 5}),Point3<>({2, 1, 2}), material_2);
+    auto cube_2 = std::make_shared<Cube>(Point3<>({10, 0, 5}),Point3<>({2, 2, 2}), material_2);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
 
