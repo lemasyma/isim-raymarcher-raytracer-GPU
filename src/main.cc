@@ -4,6 +4,7 @@
 #include <scene/objects/capsule.hh>
 #include <scene/objects/torus.hh>
 #include <scene/objects/cube.hh>
+#include <scene/objects/cylinder.hh>
 
 #include <scene/light/pointLight.hh>
 #include "scene/camera.hh"
@@ -59,7 +60,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     }
 
     auto camera = Camera(
-            Point3<>({0, 10, 0}),
+            Point3<>({20, 0, 0}),
             Point3<>({8, 0, 0}),
             Vector3<>({0, 1, 0}),
             M_PI / 2,
@@ -72,13 +73,15 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_1 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  0, 255));
     auto torus_1 = std::make_shared<Torus>(Point3<>({10, 0, -1.2}), 3, 1, material_1);
     auto material_2= std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 0));
-    auto cube_2 = std::make_shared<Cube>(Point3<>({10, 0, 5}),Point3<>({2, 2, 2}), material_2);
+    auto cylinder_2 = std::make_shared<Cylinder>(Point3<>({10, 0, 5}),Point3<>({10, 5, 1.2}), 1, material_2);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
+    auto light2 = std::make_shared<PointLight>(Point3<>({20,0, 0}));
 
     scene.addObject(torus_1);
-    scene.addObject(cube_2);
+    scene.addObject(cylinder_2);
     scene.addLight(light1);
+    scene.addLight(light2);
 
     auto resolution = vm["resolution"].as<unsigned >();
 

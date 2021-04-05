@@ -19,6 +19,7 @@ add_library(SOURCE_LIB STATIC
         scene/objects/capsule.hh
         scene/objects/torus.hh
         scene/objects/cube.hh
+        scene/objects/cylinder.hh
 
         scene/light/light.hh scene/light/pointLight.hh
         types/ray.hh types/pointn.hxx scene/pointIntensityComputer.hh
