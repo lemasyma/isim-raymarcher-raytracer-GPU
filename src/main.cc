@@ -1,5 +1,11 @@
 #include <thread>
+
 #include <scene/objects/sphere.hh>
+#include <scene/objects/capsule.hh>
+#include <scene/objects/torus.hh>
+#include <scene/objects/cube.hh>
+#include <scene/objects/cylinder.hh>
+
 #include <scene/light/pointLight.hh>
 #include "scene/camera.hh"
 #include "scene/material/uniformTexture.hh"
@@ -54,7 +60,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     }
 
     auto camera = Camera(
-            Point3<>({0, 0, 0}),
+            Point3<>({0, 5, 0}),
             Point3<>({8, 0, 0}),
             Vector3<>({0, 1, 0}),
             M_PI / 2,
@@ -64,15 +70,29 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto scene = Scene();
 
     auto texture = Texture({1, 1, 15});
+
     auto material_1 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  0, 255));
-    auto sphere_1 = std::make_shared<Sphere>(Point3<>({4, 0, -1.2}), 1, material_1);
+    auto torus_1 = std::make_shared<Torus>(Point3<>({10, 0, -1.2}), 3, 1, material_1);
+
     auto material_2= std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 0));
-    auto sphere_2 = std::make_shared<Sphere>(Point3<>({4, 0, 1.2}), 1, material_2);
+    auto cylinder_2 = std::make_shared<Cylinder>(Point3<>({10, 0, 5}),Point3<>({10, 5, 1.2}), 1, material_2);
+
+    auto material_3 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  255, 0));
+    auto capsule_3 = std::make_shared<Capsule>(Point3<>({5, -3, -1}),Point3<>({5, -2, -3}), 1, material_3);
+
+    auto material_4= std::make_shared<UniformTexture>(texture, ColorRGB(255,  255, 0));
+    auto cube_4 = std::make_shared<Cube>(Point3<>({5, 0, 5}),Point3<>({1, 1, 1}), material_4);
+
+    auto material_5 = std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 255));
+    auto sphere_5 = std::make_shared<Sphere>(Point3<>({15, 10, 0}), 3, material_5);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
 
-    scene.addObject(sphere_1);
-    scene.addObject(sphere_2);
+    scene.addObject(torus_1);
+    scene.addObject(cylinder_2);
+    scene.addObject(capsule_3);
+    scene.addObject(cube_4);
+    scene.addObject(sphere_5);
     scene.addLight(light1);
 
     auto resolution = vm["resolution"].as<unsigned >();
