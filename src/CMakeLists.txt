@@ -23,6 +23,7 @@ add_library(SOURCE_LIB STATIC
 
         scene/objects/operators/subtraction.hh
         scene/objects/operators/intersection.hh
+        scene/objects/operators/union.hh
 
         scene/light/light.hh scene/light/pointLight.hh
         types/ray.hh types/pointn.hxx scene/pointIntensityComputer.hh
