@@ -7,6 +7,7 @@
 #include <scene/objects/cylinder.hh>
 
 #include <scene/objects/operators/subtraction.hh>
+#include <scene/objects/operators/intersection.hh>
 
 #include <scene/light/pointLight.hh>
 #include "scene/camera.hh"
@@ -91,7 +92,8 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_6 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  255, 255));
     auto sphere_6 = std::make_shared<Sphere>(Point3<>({10, 0, -1.}), 3, material_6);
 
-    auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);
+//    auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);
+    auto inter = std::make_shared<Intersection>(sphere_5, sphere_6, material_5);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
 
@@ -99,7 +101,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
 //    scene.addObject(cylinder_2);
 //    scene.addObject(capsule_3);
 //    scene.addObject(cube_4);
-    scene.addObject(sub);
+    scene.addObject(inter);
     scene.addLight(light1);
 
     auto resolution = vm["resolution"].as<unsigned >();
