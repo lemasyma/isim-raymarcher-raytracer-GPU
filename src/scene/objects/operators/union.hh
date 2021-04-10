@@ -19,7 +19,7 @@ public:
     }
 
     double getSignedDistance(const Point3<>& fromPoint) override {
-        return smoothMin(firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint), 0.2);
+        return smoothMin(firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint), 2);
     }
 
     std::shared_ptr<Object> getFirstObject() const {
