@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "scene/objects/object.hh"
+#include "scene/objects/operators/subtraction.hh"
 #include "scene/light/light.hh"
 
 class Scene {

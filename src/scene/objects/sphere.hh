@@ -2,7 +2,6 @@
 
 #include "object.hh"
 
-
 class Sphere : public Object
 {
 public:
