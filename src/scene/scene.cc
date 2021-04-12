@@ -1,8 +1,5 @@
 #include "scene.hh"
 
-double Scene::intersectPrecision = 0.001;
-double Scene::normalePrecision = 0.001;
-
 std::pair<double, std::shared_ptr<Object>> Scene::getDist(const Point3<> &p) const {
     std::pair<double, std::shared_ptr<Object>> res{std::numeric_limits<double>::infinity(), nullptr};
 

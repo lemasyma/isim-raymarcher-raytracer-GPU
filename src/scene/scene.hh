@@ -8,8 +8,8 @@
 
 class Scene {
 public:
-    static double intersectPrecision;
-    static double normalePrecision;
+    constexpr static double intersectPrecision = 0.001;
+    constexpr static double normalePrecision = 0.001;
 
     using self_t = Scene;
 
