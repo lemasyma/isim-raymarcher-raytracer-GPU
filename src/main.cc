@@ -106,8 +106,8 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_10= std::make_shared<UniformTexture>(texture, ColorRGB(46,254,96));
     auto cube_10 = std::make_shared<Cube>(Point3<>({30, 10, 1}),Point3<>({2, 2, 2}), material_10);
 
-    auto material_11= std::make_shared<UniformTexture>(texture, ColorRGB(255,255,255));
-    auto plane_11 = std::make_shared<Plane>(Vector3<>({1, 1, 1}), material_11);
+    auto material_11= std::make_shared<UniformTexture>(texture, ColorRGB(100,100,100));
+    auto plane_11 = std::make_shared<Plane>(Vector3<>({0, 1, 0}), Point3<>({0,-10,0}), material_11);
 
     auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);
     auto inter = std::make_shared<Intersection>(sphere_7, sphere_8, material_7);
