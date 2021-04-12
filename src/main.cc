@@ -5,6 +5,7 @@
 #include <scene/objects/torus.hh>
 #include <scene/objects/cube.hh>
 #include <scene/objects/cylinder.hh>
+#include <scene/objects/plane.hh>
 
 #include <scene/objects/operators/subtraction.hh>
 #include <scene/objects/operators/intersection.hh>
@@ -105,6 +106,9 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_10= std::make_shared<UniformTexture>(texture, ColorRGB(46,254,96));
     auto cube_10 = std::make_shared<Cube>(Point3<>({30, 10, 1}),Point3<>({2, 2, 2}), material_10);
 
+    auto material_11= std::make_shared<UniformTexture>(texture, ColorRGB(255,255,255));
+    auto plane_11 = std::make_shared<Plane>(Vector3<>({1, 1, 1}), material_11);
+
     auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);
     auto inter = std::make_shared<Intersection>(sphere_7, sphere_8, material_7);
     auto unio = std::make_shared<Union>(cube_10, sphere_9, material_9);
@@ -115,6 +119,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     scene.addObject(cylinder_2);
     scene.addObject(capsule_3);
     scene.addObject(cube_4);
+    scene.addObject(plane_11);
     scene.addObject(sub);
     scene.addObject(inter);
     scene.addObject(unio);
