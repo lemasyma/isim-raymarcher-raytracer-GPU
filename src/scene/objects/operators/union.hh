@@ -22,6 +22,31 @@ public:
         return smoothMin(firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint), 2);
     }
 
+    Texture getTexture(const Point3<>& pos) override
+    {
+        auto firstDistance = firstObject_->getSignedDistance(pos);
+        auto secondDistance = secondObject_->getSignedDistance(pos);
+        if (firstDistance < secondDistance)
+            return firstObject_->getTexture(pos);
+        return secondObject_->getTexture(pos);
+    }
+
+    // Smooth min but for color
+    ColorRGB mixColor(const Point3<>& pos, double precision) {
+        double h = std::clamp(((secondObject_->getSignedDistance(pos) - firstObject_->getSignedDistance(pos))/precision) + 0.5, 0.0, 1.0);
+        auto firstColor = firstObject_->getColor(pos);
+        auto secondColor = secondObject_->getColor(pos);
+        return ColorRGB({firstColor.r_get() * h + (1 - h) * secondColor.r_get(),
+                         firstColor.g_get() * h + (1 - h) * secondColor.g_get(),
+                         firstColor.b_get() * h + (1 - h) * secondColor.b_get(),
+                         });
+    }
+
+    ColorRGB getColor(const Point3<>& pos) override
+    {
+        return mixColor(pos, 2);
+    }
+
     std::shared_ptr<Object> getFirstObject() const {
         return firstObject_;
     }
