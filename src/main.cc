@@ -14,6 +14,7 @@
 #include <scene/light/pointLight.hh>
 #include "scene/camera.hh"
 #include "scene/material/uniformTexture.hh"
+#include "scene/material/checkeredPatternTexture.hh"
 #include "main.hh"
 
 namespace po = boost::program_options;
@@ -106,7 +107,7 @@ void run(const po::options_description& desc, const po::variables_map& vm)
     auto material_10= std::make_shared<UniformTexture>(texture, ColorRGB(46,254,96));
     auto cube_10 = std::make_shared<Cube>(Point3<>({30, 10, 1}),Point3<>({2, 2, 2}), material_10);
 
-    auto material_11= std::make_shared<UniformTexture>(texture, ColorRGB(100,100,100));
+    auto material_11= std::make_shared<CheckeredPatternTexture>(texture, ColorRGB(255,255,255), ColorRGB(0,0,0));
     auto plane_11 = std::make_shared<Plane>(Vector3<>({0, 1, 0}), Point3<>({0,-10,0}), material_11);
 
     auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);

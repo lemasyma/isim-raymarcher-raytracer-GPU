@@ -12,7 +12,10 @@ endif()
 add_library(SOURCE_LIB STATIC
         scene/camera.hh scene/camera.cc
         scene/scene.hh scene/scene.cc
-        scene/material/textureMaterial.hh scene/material/uniformTexture.hh scene/material/texture.hh
+        scene/material/textureMaterial.hh
+        scene/material/uniformTexture.hh
+        scene/material/texture.hh
+        scene/material/checkeredPatternTexture.hh
 
         scene/objects/object.hh
         scene/objects/sphere.hh
