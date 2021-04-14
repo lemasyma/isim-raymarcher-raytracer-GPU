@@ -16,6 +16,13 @@ public:
         return std::max(-firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint));
     }
 
+    ColorRGB getColor(const Point3<>& pos) override
+    {
+        if (-firstObject_->getSignedDistance(pos) > secondObject_->getSignedDistance(pos))
+            return firstObject_->getColor(pos);
+        return secondObject_->getColor(pos);
+    }
+
     std::shared_ptr<Object> getFirstObject() const {
         return firstObject_;
     }

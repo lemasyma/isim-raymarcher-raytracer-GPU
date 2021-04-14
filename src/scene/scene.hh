@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include <memory>
+
 #include "scene/objects/object.hh"
 #include "scene/objects/operators/subtraction.hh"
 #include "scene/light/light.hh"
@@ -25,6 +27,14 @@ public:
 
     self_t &addObject(const object_t &object) {
         objects_.push_back(object);
+        return *this;
+    }
+
+    self_t &removeObject(const object_t &object) {
+        auto found = std::find(objects_.begin(), objects_.end(), object);
+        if (found != objects_.end()) {
+            objects_.erase(found);
+        }
         return *this;
     }
 
