@@ -36,7 +36,7 @@ std::vector<Vector3<>> Camera::getViewVectors(unsigned rows, unsigned cols) cons
 }
 
 ColorRGB Camera::getRayResult(const Point3<> &pos, const Vector3<> &dir, const Scene &scene) const {
-    return RayCaster(scene, pos, dir, 4).getRayColor();
+    return RayCaster(scene, pos, dir, 2).getRayColor();
 }
 
 Image &Camera::generateImage(Image &image, const Scene &scene, unsigned threadCount) const {

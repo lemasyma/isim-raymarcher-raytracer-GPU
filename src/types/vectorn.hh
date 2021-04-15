@@ -100,11 +100,17 @@ public:
     }
 
     VectorN& normalize() {
-        return (*this) /= norme();
+        auto norm = norme();
+        if (norm != 0)
+            return (*this) /= norme();
+        return *this;
     }
 
     VectorN normalize() const {
-        return (*this) / norme();
+        auto norm = norme();
+        if (norm != 0)
+            return (*this) / norme();
+        return VectorN({0, 0, 0});
     }
 
     VectorN copy() const {

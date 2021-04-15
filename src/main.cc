@@ -67,78 +67,70 @@ void run(const po::options_description& desc, const po::variables_map& vm)
 
     auto scene = Scene();
 
-    auto texture = Texture({1, 1, 15});
+    auto camera = Camera(
+            Point3<>({0, 0, 0}),
+            Point3<>({8, 0, 0}),
+            Vector3<>({0, 1, 0}),
+            M_PI / 2,
+            M_PI / 2,
+            2.0
+    );
 
-    auto material_1 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  0, 255));
-    auto torus_1 = std::make_shared<Torus>(Point3<>({10, 0, -4}), 3, 1, material_1);
+    auto texturePlane = Texture({1, 0.1, 15});
+    auto textureSphere = Texture({1, 0.35, 15});
 
-    auto material_2= std::make_shared<UniformTexture>(texture, ColorRGB(255,  0, 0));
-    auto cylinder_2 = std::make_shared<Cylinder>(Point3<>({10, 0, 5}),Point3<>({10, 5, 1.2}), 1, material_2);
+    auto material_1= std::make_shared<CheckeredPatternTexture>(texturePlane, ColorRGB(255,255,255), ColorRGB(100,100,100));
+    auto plane_1 = std::make_shared<Plane>(Vector3<>({0, 1, 0}), 10.0, material_1);
 
-    auto material_3 = std::make_shared<UniformTexture>(texture, ColorRGB(0,  255, 0));
-    auto capsule_3 = std::make_shared<Capsule>(Point3<>({5, -3, -1}),Point3<>({5, -2, -3}), 1, material_3);
+    auto material_2= std::make_shared<UniformTexture>(texturePlane, ColorRGB(100,154,213));
+    auto plane_2 = std::make_shared<Plane>(Vector3<>({0, -1, 0}), 10.0, material_2);
+//
+    auto material_3 = std::make_shared<UniformTexture>(texturePlane, ColorRGB(34, 145, 112));
+    auto plane_3 = std::make_shared<Plane>(Vector3<>({0, 0, 1}), 10.0, material_3);
 
-    auto material_4= std::make_shared<UniformTexture>(texture, ColorRGB(255,  255, 0));
-    auto cube_4 = std::make_shared<Cube>(Point3<>({15, -5, 1}),Point3<>({2, 2, 2}), material_4);
+    auto material_4 = std::make_shared<UniformTexture>(texturePlane, ColorRGB(170, 152, 14));
+    auto plane_4 = std::make_shared<Plane>(Vector3<>({0, 0, -1}), 10.0, material_4);
 
-    auto material_11= std::make_shared<CheckeredPatternTexture>(texture, ColorRGB(255,255,255), ColorRGB(100,100,100));
-    auto plane_11 = std::make_shared<Plane>(Vector3<>({0, 1, 0}), Point3<>({0,-10,0}), material_11);
+    auto material_5 = std::make_shared<UniformTexture>(texturePlane, ColorRGB(123, 94, 232));
+    auto plane_5 = std::make_shared<Plane>(Vector3<>({-1, 0, 0}),20.0, material_5);
 
     auto light1 = std::make_shared<PointLight>(Point3<>({0,0, 0}));
 
-    scene.addObject(torus_1);
-    scene.addObject(cylinder_2);
-    scene.addObject(capsule_3);
-    scene.addObject(cube_4);
-    scene.addObject(plane_11);
+    scene.addObject(plane_1);
+    scene.addObject(plane_2);
+//    scene.addObject(plane_3);
+//    scene.addObject(plane_4);
+    scene.addObject(plane_5);
     scene.addLight(light1);
 
     auto resolution = vm["resolution"].as<unsigned >();
-    for (double i = -3; i > -30; i -= 0.1) {
-        auto camera = Camera(
-                Point3<>({0, 5, i}),
-                Point3<>({8, 0, 0}),
-                Vector3<>({0, 1, 0}),
-                M_PI / 2,
-                M_PI / 2,
-                2.0
-        );
 
-        auto material_5 = std::make_shared<UniformTexture>(texture, ColorRGB(85,107,47));
-        auto sphere_5 = std::make_shared<Sphere>(Point3<>({3, 0, 3}), 1, material_5);
+//    Image image(resolution, resolution);
+//    camera.generateImage(image, scene, vm["thread"].as<unsigned>());
+//    image.saveImage("plane.ppm");
 
-        auto material_6 = std::make_shared<UniformTexture>(texture, ColorRGB(76,  251, 194));
-        auto sphere_6 = std::make_shared<Sphere>(Point3<>({5 + std::sin(i), 0, 3}), 2, material_6);
+    double start = -16.0;
+    double end = 16.0;
+    double increment = 0.1;
+    for (double i = start; i <= end; i += increment) {
 
-        auto material_7 = std::make_shared<UniformTexture>(texture, ColorRGB(193,248,144));
-        auto sphere_7 = std::make_shared<Sphere>(Point3<>({20, 5, -4}), 2, material_7);
+        auto material_6 = std::make_shared<UniformTexture>(textureSphere, ColorRGB(85,107,47));
+        auto sphere_6 = std::make_shared<Sphere>(Point3<>({15, 0, i}), 3, material_6);
 
-        auto material_8 = std::make_shared<UniformTexture>(texture, ColorRGB(72,28,229));
-        auto sphere_8 = std::make_shared<Sphere>(Point3<>({20, 4 + std::sin(i), -3}), 2, material_8);
+        auto unio1 = std::make_shared<Union>(plane_3, sphere_6, material_5);
+        auto unio2 = std::make_shared<Union>(plane_4, unio1, material_5);
 
-        auto material_9 = std::make_shared<UniformTexture>(texture, ColorRGB(100,154,213));
-        auto sphere_9 = std::make_shared<Sphere>(Point3<>({30, 10, -1 + std::sin(i)}), 3, material_9);
-
-        auto material_10= std::make_shared<UniformTexture>(texture, ColorRGB(46,254,96));
-        auto cube_10 = std::make_shared<Cube>(Point3<>({30, 10, 1 - std::sin(i)}),Point3<>({2, 2, 2}), material_10);
-
-        auto sub = std::make_shared<Subtraction>(sphere_5, sphere_6, material_5);
-        auto inter = std::make_shared<Intersection>(sphere_7, sphere_8, material_7);
-        auto unio = std::make_shared<Union>(cube_10, sphere_9, material_9);
-
-        scene.addObject(sub);
-        scene.addObject(inter);
-        scene.addObject(unio);
+        scene.addObject(unio1);
+        scene.addObject(unio2);
 
         Image image(resolution, resolution);
         camera.generateImage(image, scene, vm["thread"].as<unsigned>());
-        image.saveImage("output" + std::to_string((i * -10.0)) + ".ppm");
+        auto fileName = "plane" + std::to_string(((i + std::abs(start)) * (1/increment))) + ".ppm";
+        image.saveImage(fileName);
 
-        std::cout << "Generated image " << "output" + std::to_string((i * -10.0)) + ".ppm" << std::endl;
+        std::cout << "Generated image " << fileName << std::endl;
 
-        scene.removeObject(sub);
-        scene.removeObject(inter);
-        scene.removeObject(unio);
+        scene.removeObject(unio1);
+        scene.removeObject(unio2);
     }
-
 }
