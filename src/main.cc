@@ -165,7 +165,6 @@ void run(const po::options_description& desc, const po::variables_map& vm)
                 M_PI / 2,
                 2.0
         );
-
 // ####### OPERATORS - MOVING DEPENDING ON SIN(I) ##############################;
         sub->getSecondObject()->translate(Point3<>({std::sin(i), 0, 0}));
         inter->getSecondObject()->translate(Point3<>({0, std::sin(i), 0}));
@@ -178,6 +177,11 @@ void run(const po::options_description& desc, const po::variables_map& vm)
         image.saveImage("RaymarcherDominiqueLea" + std::to_string((int) std::round((i + std::abs(start)) * (1.0/increment))) + ".ppm");
 
         std::cout << "Generated image " << "RaymarcherDominiqueLea" + std::to_string((int) std::round((i + std::abs(start)) * (1.0/increment))) + ".ppm" << std::endl;
-    }
 
+// ################ GOING BACK TO THE PREVIOUS POSITIONS #######################
+        sub->getSecondObject()->translate(Point3<>({- std::sin(i), 0, 0}));
+        inter->getSecondObject()->translate(Point3<>({0, - std::sin(i), 0}));
+        unio->getSecondObject()->translate(Point3<>({0, 0, - std::sin(i)}));
+        unio->getFirstObject()->translate(Point3<>({0, 0, std::sin(i)}));
+    }
 }
