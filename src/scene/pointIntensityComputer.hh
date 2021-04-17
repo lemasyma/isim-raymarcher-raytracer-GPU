@@ -22,7 +22,7 @@ public:
                // get closer to real intersection
                + (inDir * Scene::intersectPrecision / 2.0)
                // relaunch with safe distance to avoid self collisionning
-               + (outDir * Scene::intersectPrecision * 3.0);
+               + (outDir * Scene::intersectPrecision * 25.0);
     }
 
     double shadowingFactor(const Light& light, const Vector3<> &toLight) const {

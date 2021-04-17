@@ -102,14 +102,14 @@ public:
     VectorN& normalize() {
         auto norm = norme();
         if (norm != 0)
-            return (*this) /= norme();
+            return (*this) /= norm;
         return *this;
     }
 
     VectorN normalize() const {
         auto norm = norme();
         if (norm != 0)
-            return (*this) / norme();
+            return (*this) / norm;
         return VectorN({0, 0, 0});
     }
 

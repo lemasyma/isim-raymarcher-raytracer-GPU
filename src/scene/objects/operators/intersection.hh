@@ -16,6 +16,11 @@ public:
         return std::max(firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint));
     }
 
+    void translate(const Point3<>& translation) override {
+        firstObject_->translate(translation);
+        secondObject_->translate(translation);
+    }
+
     ColorRGB getColor(const Point3<>& pos) override
     {
         if (firstObject_->getSignedDistance(pos) > secondObject_->getSignedDistance(pos))

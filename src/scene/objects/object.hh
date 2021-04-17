@@ -15,6 +15,8 @@ public:
 
     virtual double getSignedDistance(const Point3<>& fromPoint) = 0;
 
+    virtual void translate(const Point3<>& translation) = 0;
+
     virtual Texture getTexture(const Point3<>& pos)
     { return material_->getTexture(pos); }
 

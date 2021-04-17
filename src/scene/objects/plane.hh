@@ -14,6 +14,11 @@ public:
                                         fromPoint[2]})) + distance_;
     }
 
+    void translate(const Point3<>& translation) override {
+        director_ += Vector3<>({translation[0], translation[1], translation[2]});
+        director_.normalize();
+    }
+
 protected:
     Vector3<> director_;
     double distance_;

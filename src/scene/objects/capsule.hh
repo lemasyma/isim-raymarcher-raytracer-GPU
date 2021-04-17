@@ -22,6 +22,12 @@ public:
 
         return fromPoint.distanceTo(center) - radius_;
     }
+
+    void translate(const Point3<>& translation) override {
+        begin_ += translation;
+        end_ += translation;
+    }
+
 protected:
     Point3<> begin_;
     Point3<> end_;
