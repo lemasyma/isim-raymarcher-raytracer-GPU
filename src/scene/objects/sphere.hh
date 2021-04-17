@@ -13,6 +13,10 @@ public:
         return fromPoint.distanceTo(center_) - radius_;
     }
 
+    void translate(const Point3<>& translation) override {
+        center_ += translation;
+    }
+
     const Point3<>& getCenter() const
     { return center_; }
 

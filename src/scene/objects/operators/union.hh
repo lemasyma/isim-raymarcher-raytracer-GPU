@@ -23,6 +23,11 @@ public:
         return smoothMin(firstObject_->getSignedDistance(fromPoint), secondObject_->getSignedDistance(fromPoint));
     }
 
+    void translate(const Point3<>& translation) override {
+        firstObject_->translate(translation);
+        secondObject_->translate(translation);
+    }
+
     Texture getTexture(const Point3<>& pos) override
     {
         auto firstDistance = firstObject_->getSignedDistance(pos);

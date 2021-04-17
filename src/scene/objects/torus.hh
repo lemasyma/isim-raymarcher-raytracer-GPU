@@ -17,6 +17,10 @@ public:
         double distanceFromCenter = Vector3<>({pointFromOrigin[0], 0, pointFromOrigin[2]}).norme() - bigRadius_;
         return Vector3<>({distanceFromCenter,pointFromOrigin[1],0}).norme() - smallRadius_;
     }
+
+    void translate(const Point3<>& translation) override {
+        center_ += translation;
+    }
 protected:
     Point3<> center_;
 

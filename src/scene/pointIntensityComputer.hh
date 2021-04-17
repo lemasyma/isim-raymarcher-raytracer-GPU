@@ -26,22 +26,6 @@ public:
     }
 
     double shadowingFactor(const Light& light, const Vector3<> &toLight) const {
-        // Check if the front / back of the face is visible by the light
-        /*
-        {
-            // If normal and light are in same direction
-            if (normal_.dot(toLight) >= 0) {
-                // If intersection and normal in same direction -> error
-                if (normal_.dot(ray.vector_) > 0)
-                    return {};
-            } else {
-                // If intersection and normal in different direction -> error
-                if (normal_.dot(ray.vector_) < 0)
-                    return {};
-            }
-        }
-        */
-
         double minDistSeen = std::numeric_limits<double>::infinity();
         double totDistance = 0.0;
         auto finalObject = std::shared_ptr<Object>();
