@@ -16,7 +16,7 @@ video, on utilise ffmpeg et la commande :
 "ffmpeg -framerate <nombre de FPS> -i "RaymarcherDominiqueLea%d.ppm" RaymarcherDominiqueLea.mp4"
 
 L'animation suivante a ete generee avec start = -10.0, end = 10.0,
-increment = 0.1. [lien youtube]
+increment = 0.1. [https://youtu.be/qEtJRHdfl_c]
 
 /!\ Generer une animation prend du temps et beaucoup de ressources.
 
