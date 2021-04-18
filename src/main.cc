@@ -44,7 +44,7 @@ po::options_description define_options()
     desc.add_options()
             ("thread,t",
              po::value<unsigned>()->default_value(std::max(std::thread::hardware_concurrency() - 1, 1U)),
-             "height width specify wanted resolution");
+             "number of threads used");
     return desc;
 }
 
@@ -153,9 +153,9 @@ void run(const po::options_description& desc, const po::variables_map& vm)
 // START: BEGINNING OF THE POSITION OF THE CAMERA (CAMERA.Z)
 // END: LAST POSITION OF THE CAMERA (CAMERA.Z)
 // INCREMENT: USEFUL FOR THE NUMBER OF FPS YOU WISH TO HAVE
-    double start = -10.0;
-    double end = 10.0;
-    double increment = 0.1;
+    double start = 0.0;
+    double end = 1.0;
+    double increment = 2.0;
     for (double i = start; i <= end; i += increment) {
         auto camera = Camera(
                 Point3<>({-2, 5, i}),
