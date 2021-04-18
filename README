@@ -24,3 +24,19 @@ L'animation precedente a pris environ 1h a generer avec 24Go de RAM et un CPU
 Intel Core i7 8e generation.
 
 RAYTRACER GPU:
+
+Pas d'options de cli :(
+
+Génération d'une image  : main.cu > fonction mainImage
+Visualisation temp réel : main.cu > fonction mainSdl
+Génération animation    : main.cu > fonction mainSdl + ajout sauvegarde d'image
+
+Génération d'une scene  :
+  - sceneGenerator/setupScene  > ajout d'une fonction
+  - sceneGenerator/updateScene > ajout d'une action de mise à jour de scene
+  - sceneGenerator/runScene    > ajout d'un kernel cuda custom *si besoin*
+
+  - main > fonction mainSdl : remplacer setupGpuSphere et runGpuUpdate
+
+Pourquoi c'est si compliqué ? parce que les contraintes de kernel et device
+function m'ont empeche d'appliquer le template inheritance design pattern.
